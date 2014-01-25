@@ -161,7 +161,32 @@ namespace LinkedListLibrary
 
         public IDoubleLinkedListNode<T> RemoveBefore(IDoubleLinkedListNode<T> node) 
         {
-            throw new NotImplementedException();
+            IDoubleLinkedListNode<T> removed;
+            node = this.Find(node);
+
+            if (node == null)
+            {
+                throw new InvalidOperationException(
+                    "Node not found in list");
+            }
+            else
+            {
+                if (node.Previous == this.First )
+                {
+                    removed = RemoveFirst();
+                }
+                else
+                {
+                    removed = node.Previous;
+                    node.Previous = node.Previous.Previous;
+                    node.Previous.Next = node;
+
+                    // Removed node might be added to other list
+                    removed.Next = null;
+                    removed.Previous = null;
+                }
+                this.Count--;
+            }
         }
 
         public IDoubleLinkedListNode<T> RemoveAfter(IDoubleLinkedListNode<T> node)
