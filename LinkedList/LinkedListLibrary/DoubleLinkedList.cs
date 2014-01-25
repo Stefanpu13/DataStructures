@@ -166,13 +166,44 @@ namespace LinkedListLibrary
 
         public IDoubleLinkedListNode<T> RemoveFirst()
         {
-            throw new NotImplementedException();
+            IDoubleLinkedListNode<T> removedNode = this.First;
+
+            if (this.Count < 2)
+            {
+                this.HandleSmallCountRemoval();
+            }
+
+            this.First = this.First.Next;
+            this.First.Previous = null;
+            this.Count--;
+
+            return removedNode;
         }
 
         public IDoubleLinkedListNode<T> RemoveLast()
         {
-            throw new NotImplementedException();
+            IDoubleLinkedListNode<T> removedNode = this.Last;
+
+            if (this.Count < 2)
+            {
+                this.HandleSmallCountRemoval();
+            }
+
+            this.Last = this.First.Previous;
+            this.First.Next = null;
+            this.Count--;
+
+            return removedNode;
         }
 
+        private void HandleSmallCountRemoval()
+        {
+            if (this.Count == 0)
+            {
+                throw new InvalidOperationException("Can not remove from empty list.");
+            }
+            
+            this.First = this.Last = null;
+        }
     }
 }
