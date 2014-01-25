@@ -177,9 +177,11 @@ namespace LinkedListLibrary
             {
                 this.HandleSmallCountRemoval();
             }
-
-            this.First = this.First.Next;
-            this.First.Previous = null;
+            else
+            {
+                this.First = this.First.Next;
+                this.First.Previous = null;
+            }            
             this.Count--;
 
             return removedNode;
@@ -193,11 +195,13 @@ namespace LinkedListLibrary
             {
                 this.HandleSmallCountRemoval();
             }
-
-            this.Last = this.First.Previous;
-            this.First.Next = null;
+            else
+            {
+                this.Last = this.First.Previous;
+                this.First.Next = null;
+            }
+            
             this.Count--;
-
             return removedNode;
         }
 

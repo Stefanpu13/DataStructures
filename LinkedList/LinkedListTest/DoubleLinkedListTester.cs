@@ -90,6 +90,43 @@ namespace LinkedListTest
         }
 
         #endregion/
+
+        #region 'RemoveFirst' method tests
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void RemoveFirst_EmptyList_ThrowsException()
+        {
+            IDoubleLinkedList<int> list = new DoubleLinkedList<int>();
+            list.RemoveFirst();
+        }
+
+        [TestMethod]        
+        public void RemoveFirst_OneItemInList_FirstAndLastAreNull_CountIsReduced()
+        {
+            IDoubleLinkedList<int> list = new DoubleLinkedList<int>(4);
+            list.RemoveFirst();
+
+            Assert.IsNull(list.First);
+            Assert.AreSame(list.First, list.Last);
+            Assert.AreEqual(list.Count, 0);
+        }
+
+        [TestMethod]
+        public void RemoveFirst_ManyItemsInList_FirstIsUpdated_CountIsReduced()
+        {
+            IDoubleLinkedList<int> list = new DoubleLinkedList<int>(4);
+            list.AddFirst(6);
+            var newFirst = list.First;
+
+            var removed = list.RemoveFirst();
+            
+            Assert.AreSame(newFirst, removed);
+            Assert.AreNotSame(newFirst, list.First);
+            Assert.AreEqual(list.Count, 1);
+        }
+
+
+        #endregion
     }
 
 }
