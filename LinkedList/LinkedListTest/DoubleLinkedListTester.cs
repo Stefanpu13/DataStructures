@@ -104,11 +104,12 @@ namespace LinkedListTest
         public void RemoveFirst_OneItemInList_FirstAndLastAreNull_CountIsReduced()
         {
             IDoubleLinkedList<int> list = new DoubleLinkedList<int>(4);
+            var count = list.Count;
             list.RemoveFirst();
 
             Assert.IsNull(list.First);
             Assert.AreSame(list.First, list.Last);
-            Assert.AreEqual(list.Count, 0);
+            Assert.AreEqual(list.Count, count - 1);
         }
 
         [TestMethod]
@@ -117,12 +118,53 @@ namespace LinkedListTest
             IDoubleLinkedList<int> list = new DoubleLinkedList<int>(4);
             list.AddFirst(6);
             var newFirst = list.First;
+            var count = list.Count;
 
             var removed = list.RemoveFirst();
             
             Assert.AreSame(newFirst, removed);
             Assert.AreNotSame(newFirst, list.First);
-            Assert.AreEqual(list.Count, 1);
+            Assert.AreEqual(list.Count, count - 1);
+        }
+
+
+        #endregion
+
+        #region 'RemoveLast' method tests
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void RemoveLast_EmptyList_ThrowsException()
+        {
+            IDoubleLinkedList<int> list = new DoubleLinkedList<int>();
+            list.RemoveLast();
+        }
+
+        [TestMethod]
+        public void RemoveLast_OneItemInList_FirstAndLastAreNull_CountIsReduced()
+        {
+            IDoubleLinkedList<int> list = new DoubleLinkedList<int>(4);
+            var count = list.Count;
+
+            list.RemoveLast();
+            
+
+            Assert.IsNull(list.Last);
+            Assert.AreSame(list.First, list.Last);
+            Assert.AreEqual(list.Count, count - 1);
+        }
+
+        [TestMethod]
+        public void RemoveLast_ManyItemsInList_FirstIsUpdated_CountIsReduced()
+        {
+            IDoubleLinkedList<int> list = new DoubleLinkedList<int>(4);
+            list.AddFirst(6);
+            var newLast = list.Last;
+            var count = list.Count;
+            var removed = list.RemoveLast();
+
+            Assert.AreSame(newLast, removed);
+            Assert.AreNotSame(newLast, list.Last);
+            Assert.AreEqual(list.Count , count - 1);
         }
 
 
