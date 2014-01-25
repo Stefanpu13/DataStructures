@@ -17,6 +17,14 @@ namespace LinkedListLibrary
 
         void AddAfter(IDoubleLinkedListNode<T> node, IDoubleLinkedListNode<T> newNode);
 
+        IDoubleLinkedListNode<T> RemoveFirst();
+
+        IDoubleLinkedListNode<T> RemoveLast();
+
+        IDoubleLinkedListNode<T> RemoveBefore(IDoubleLinkedListNode<T> node);
+
+        IDoubleLinkedListNode<T> RemoveAfter(IDoubleLinkedListNode<T> node);
+
         IDoubleLinkedListNode<T> Find(IDoubleLinkedListNode<T> node);
     }
 }

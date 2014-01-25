@@ -154,5 +154,25 @@ namespace LinkedListLibrary
             return foundNode;
         }
 
+        public IDoubleLinkedListNode<T> RemoveBefore(IDoubleLinkedListNode<T> node) 
+        {
+            throw new NotImplementedException();
+        }
+
+        public IDoubleLinkedListNode<T> RemoveAfter(IDoubleLinkedListNode<T> node)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IDoubleLinkedListNode<T> RemoveFirst()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IDoubleLinkedListNode<T> RemoveLast()
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }
