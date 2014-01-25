@@ -159,9 +159,9 @@ namespace LinkedListLibrary
             return foundNode;
         }
 
-        public IDoubleLinkedListNode<T> RemoveBefore(IDoubleLinkedListNode<T> node) 
+        public IDoubleLinkedListNode<T> RemoveBefore(IDoubleLinkedListNode<T> node)
         {
-            IDoubleLinkedListNode<T> removed;
+            IDoubleLinkedListNode<T> removed = null;
             node = this.Find(node);
 
             if (node == null)
@@ -169,9 +169,9 @@ namespace LinkedListLibrary
                 throw new InvalidOperationException(
                     "Node not found in list");
             }
-            else
+            if (node != this.First)
             {
-                if (node.Previous == this.First )
+                if (node.Previous == this.First)
                 {
                     removed = RemoveFirst();
                 }
@@ -184,9 +184,12 @@ namespace LinkedListLibrary
                     // Removed node might be added to other list
                     removed.Next = null;
                     removed.Previous = null;
+
+                    this.Count--;
                 }
-                this.Count--;
             }
+
+            return removed;
         }
 
         public IDoubleLinkedListNode<T> RemoveAfter(IDoubleLinkedListNode<T> node)
