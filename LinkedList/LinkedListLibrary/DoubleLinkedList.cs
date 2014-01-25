@@ -22,23 +22,24 @@ namespace LinkedListLibrary
         public DoubleLinkedList(T value)
         {
             this.First = this.Last = new DoubleLinkedListNode<T>(value);
+            this.Count = 1;
         }
 
         public void AddFirst(T value) 
         {
-
             if (value != null)
             {
                 var newNode = new DoubleLinkedListNode<T>(value);
 
-                if (this.First == null)
+                if (this.Count == 0)
                 {
                     this.First = this.Last = newNode;
                 }                                    
                 else
                 {
-                    AddFirstNode(newNode);
+                    AddFirstNode(newNode);                    
                 }
+                this.Count++;
             }
         }
 
@@ -64,6 +65,8 @@ namespace LinkedListLibrary
                 {
                     AddBeforeNode(node.Next, newNode); 
                 }
+
+                this.Count++;
             }
         }
 
@@ -79,15 +82,15 @@ namespace LinkedListLibrary
             if (value != null)
             {
                 var newNode = new DoubleLinkedListNode<T>(value);
-                if (this.First == null)
+                if (this.Count == 0)
                 {
                     this.First = this.Last = newNode;
                 }
                 else
                 {
-                    AddLastNode(newNode);
+                    AddLastNode(newNode);                    
                 }
-                
+                this.Count++;
             }
         }
 
@@ -120,6 +123,8 @@ namespace LinkedListLibrary
                 {
                     AddBeforeNode(node, newNode);                    
                 }
+
+                this.Count++;
             }
         }
 
