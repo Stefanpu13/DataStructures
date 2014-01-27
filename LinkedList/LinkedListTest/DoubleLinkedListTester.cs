@@ -238,6 +238,70 @@ namespace LinkedListTest
 
 
         #endregion
-    }
 
+        #region'RemoveAfter' tests
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void RemoveAfter_EmptyList_ThrowsException()
+        {
+            IDoubleLinkedList<int> list = new DoubleLinkedList<int>();
+            list.RemoveAfter(list.First);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void RemoveAfter_NodeNotInList_ThrowsException()
+        {
+            IDoubleLinkedList<int> list = new DoubleLinkedList<int>(3);
+            list.RemoveAfter(new DoubleLinkedListNode<int>(3));
+        }
+
+        [TestMethod]
+        public void RemoveAfter_NodeIsAfterLastInList_ReturnsNull_CountIsNotChanged()
+        {
+            IDoubleLinkedList<int> list = new DoubleLinkedList<int>(3);
+            var count = list.Count;
+
+            var removed = list.RemoveBefore(list.Last);
+
+            Assert.IsNull(removed);
+            Assert.AreEqual(list.Count, count);
+        }
+
+        [TestMethod]
+        public void RemoveAfter_NodeIsLastInList_ReturnsLast_CountIsReduced()
+        {
+            IDoubleLinkedList<int> list = new DoubleLinkedList<int>(3);
+            list.AddLast(5);
+            var last = list.Last;
+            var count = list.Count;
+
+            var removed = list.RemoveAfter(list.Last.Previous);
+
+            Assert.AreSame(removed, last);
+            Assert.AreEqual(list.Count, count - 1);
+        }
+
+        [TestMethod]
+        public void RemoveAfter_NotLast_PreviousAndNextNodesReferencesUpdated_CountReduces()
+        {
+            IDoubleLinkedList<int> list = new DoubleLinkedList<int>(3);
+            list.AddFirst(2);
+            list.AddFirst(1);
+            var previous = list.First;
+            var next = list.Last;
+            var count = list.Count;
+
+            var removed = list.RemoveAfter(list.First);
+
+            Assert.AreSame(previous.Next, next);
+            Assert.AreSame(next.Previous, previous);
+            Assert.IsNull(removed.Next);
+            Assert.IsNull(removed.Previous);
+            Assert.AreEqual(list.Count, count - 1);
+        }
+
+        #endregion
+    }
 }
