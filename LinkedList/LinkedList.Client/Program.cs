@@ -53,9 +53,6 @@ namespace LinkedList.Client
             Print(l);
             l = RemoveDuplicates(l);
             Print(l);
-
-           l.First.Next = RemoveNode(l.First.Next);
-            Print(l);
         }
 
         private static void Print(IDoubleLinkedList<int> list)
@@ -90,13 +87,6 @@ namespace LinkedList.Client
             }
 
             return newList;
-        }
-
-        private static IDoubleLinkedListNode<T> RemoveNode<T>(
-            IDoubleLinkedListNode<T> node) where T: IComparable
-        {
-            node = node.Next;
-            return node;
         }
     }
 }
