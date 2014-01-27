@@ -44,20 +44,49 @@ namespace LinkedList.Client
             Console.Write("Expected 1 2 3 0 4 5 6 -> ");
             Print(l);
 
+            l.AddFirst(0);
+            l.AddLast(4);
+            l.AddLast(5);
+            l.AddLast(3);
+            l.AddLast(4);
+
+            Print(l);
+            l = RemoveDuplicates(l);
+            Print(l);
         }
 
-        private static void Print(IDoubleLinkedList<int> l)
+        private static void Print(IDoubleLinkedList<int> list)
         {
-            var current = l.First;
-            StringBuilder list = new StringBuilder();
+            var current = list.First;
+            StringBuilder listInfo = new StringBuilder();
 
             while (current != null)
             {
-                list.Append(current.Value.ToString() + " ");
+                listInfo.Append(current.Value.ToString() + " ");
                 current = current.Next;
             }
 
-            Console.WriteLine(list.ToString());
+            Console.WriteLine(listInfo.ToString());
+        }
+
+        private static IDoubleLinkedList<T> RemoveDuplicates<T>(IDoubleLinkedList<T> list)
+            where T: IComparable
+        {
+            List<T> values = new List<T>();
+            IDoubleLinkedList<T> newList = new DoubleLinkedList<T>();
+
+            var currentNode = list.First;
+            while (currentNode != null)
+            {
+                if (!values.Contains(currentNode.Value))
+                {
+                    newList.AddLast(currentNode.Value);
+                    values.Add(currentNode.Value);
+                }
+                currentNode = currentNode.Next;
+            }
+
+            return newList;
         }
     }
 }
