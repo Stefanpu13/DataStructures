@@ -235,6 +235,7 @@ namespace LinkedListLibrary
             {
                 this.First = this.First.Next;
                 this.First.Previous = null;
+                removedNode.Next = null;
             }            
             this.Count--;
 
@@ -253,6 +254,7 @@ namespace LinkedListLibrary
             {
                 this.Last = this.First.Previous;
                 this.First.Next = null;
+                removedNode.Previous = null;
             }
             
             this.Count--;

@@ -123,8 +123,9 @@ namespace LinkedListTest
             var removed = list.RemoveFirst();
             
             Assert.AreSame(newFirst, removed);
-            Assert.AreNotSame(newFirst, list.First);
+            Assert.AreNotSame(newFirst, list.First);            
             Assert.AreEqual(list.Count, count - 1);
+            Assert.IsNull(removed.Next);
         }
 
 
@@ -154,7 +155,7 @@ namespace LinkedListTest
         }
 
         [TestMethod]
-        public void RemoveLast_ManyItemsInList_FirstIsUpdated_CountIsReduced()
+        public void RemoveLast_ManyItemsInList_LastIsUpdated_CountIsReduced()
         {
             IDoubleLinkedList<int> list = new DoubleLinkedList<int>(4);
             list.AddFirst(6);
@@ -165,8 +166,8 @@ namespace LinkedListTest
             Assert.AreSame(newLast, removed);
             Assert.AreNotSame(newLast, list.Last);
             Assert.AreEqual(list.Count , count - 1);
+            Assert.IsNull(removed.Previous);
         }
-
 
         #endregion
 
